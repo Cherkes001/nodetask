@@ -1,10 +1,23 @@
 const express = require('express');
 const fs = require('fs');
+const { userInfo } = require('os');
 const app = express();
 require('dotenv').config();
-
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/', {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  dbName: 'some-db',
+  user: 'mongoadmin',
+  pass: 'admin',
+});
+const Cat = mongoose.model('Cat', { name: String });
 app.get('/', function (req, res) {
   res.send('Hello World');
+  
+
+  const kitty = new Cat({ name: 'Zildjian' });
+  kitty.save().then(() => console.log('meow'));
 });
 
 app.get('/api/hello', function (req, res) {
@@ -25,6 +38,7 @@ app.get('/api/get-config', function (req, res) {
 });
 
 app.get('/api/learn', function (req, res) {
+  user.find('id', req.queryParam.queryParam);
   if (req.query.queryParam) {
     res.send({
       success: true,
