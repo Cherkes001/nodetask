@@ -1,29 +1,30 @@
-const express = require("express");
-const fs = require("fs");
+const express = require('express');
+const fs = require('fs');
 const app = express();
+require('dotenv').config();
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
+app.get('/', function (req, res) {
+  res.send('Hello World');
 });
 
-app.get("/api/hello", function (req, res) {
+app.get('/api/hello', function (req, res) {
   res.send({
     success: true,
-    data: "world",
+    data: 'world',
   });
 });
 
-app.get("/api/get-config", function (req, res) {
+app.get('/api/get-config', function (req, res) {
   res.send({
     success: true,
     data: {
-      port: "Server port: " + listener.address().port,
-      host: "Server adress is: " + listener.address().address,
+      port: 'Server port: ' + listener.address().port,
+      host: 'Server adress is: ' + listener.address().address,
     },
   });
 });
 
-app.get("/api/learn", function (req, res) {
+app.get('/api/learn', function (req, res) {
   if (req.query.queryParam) {
     res.send({
       success: true,
@@ -36,7 +37,7 @@ app.get("/api/learn", function (req, res) {
   }
 });
 
-app.get("/api/learn/path/:pathParam", function (req, res) {
+app.get('/api/learn/path/:pathParam', function (req, res) {
   if (req.params.pathParam) {
     res.send({
       success: true,
@@ -49,21 +50,16 @@ app.get("/api/learn/path/:pathParam", function (req, res) {
   }
 });
 
-app.post("/api/store-text/:value", function (req, res) {
+app.post('/api/store-text/:value', function (req, res) {
+  fs.appendFile('text.txt', req.params.value + '\n', function (err) {
+    if (err) throw err;
+  });
   res.send({
     success: true,
     data: req.params.value,
   });
-
-  const file = fs.createWriteStream("text.txt");
-  file.write(req.params.value);
-  file.end();
-  /*
-  const file = fs.createWriteStream("text.txt");
-  file.once("open", function (fd) {
-    file.write(req.params.value + "\n");
-    file.end();
-  });*/
 });
 
-let listener = app.listen(3000, "127.0.0.1");
+app.use('/static', express.static('static'));
+//console.log(process.env.npm_package_name);
+let listener = app.listen(process.env.PORT, process.env.HOST);
