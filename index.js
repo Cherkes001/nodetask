@@ -4,6 +4,11 @@ const { userInfo } = require('os');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
+const { Console } = require('console');
+const bodyParser = require('body-parser');
+const { request, query } = require('express');
+const { Model } = require('mongoose');
+
 mongoose.connect('mongodb://localhost:27017/', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -11,11 +16,12 @@ mongoose.connect('mongodb://localhost:27017/', {
   user: 'mongoadmin',
   pass: 'admin',
 });
-const Cat = mongoose.model('Cat', { name: String });
-app.get('/', function (req, res) {
-  res.send('Hello World');
-  
 
+app.use(bodyParser.json());
+
+const Cat = mongoose.model('Cat', { name: String });
+app.get('/', async function (req, res) {
+  res.send('Hello World');
   const kitty = new Cat({ name: 'Zildjian' });
   kitty.save().then(() => console.log('meow'));
 });
@@ -64,16 +70,44 @@ app.get('/api/learn/path/:pathParam', function (req, res) {
   }
 });
 
-app.post('/api/store-text/:value', function (req, res) {
-  fs.appendFile('text.txt', req.params.value + '\n', function (err) {
+app.post('/api/store-text', function (req, res, next) {
+  fs.appendFile('text.txt', req.body.value + '\n', function (err) {
     if (err) throw err;
   });
   res.send({
     success: true,
-    data: req.params.value,
+    data: req.body.value,
+  });
+  next();
+});
+
+/*app.use('/api/write', function (req, res, next) {
+  next();
+});*/
+
+app.post('/api/writedb', function (req, res, next) {
+  const kitty = new Cat({ name: req.body.record });
+  kitty.save();
+  res.send({
+    succes: true,
+    data: req.body.record,
+  });
+  next();
+});
+
+app.get('/api/readb', async function (req, res) {
+  const options = {
+    limit: +req.query.limit || 5,
+    page: req.query.page || 1,
+  };
+  const handle = await Cat.find({})
+    .limit(options.limit)
+    .skip(options.page * options.limit - options.limit);
+  res.send({
+    success: true,
+    data: handle,
   });
 });
 
 app.use('/static', express.static('static'));
-//console.log(process.env.npm_package_name);
 let listener = app.listen(process.env.PORT, process.env.HOST);
