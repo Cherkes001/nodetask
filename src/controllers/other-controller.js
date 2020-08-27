@@ -29,6 +29,22 @@ class OtherController {
     });
     next();
   }
+
+  async pathParam(req, res, next) {
+    const data = await this.otherService.pathParam(req);
+    res.send({
+      success: true,
+      data,
+    });
+  }
+
+  async learn(req, res, next) {
+    const data = await this.otherService.learn(req);
+    res.send({
+      success: true,
+      data,
+    });
+  }
 }
 
 module.exports = OtherController;

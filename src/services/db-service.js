@@ -12,5 +12,11 @@ class DBService {
       .limit(options.limit)
       .skip(options.page * options.limit - options.limit);
   }
+
+  async writedb(req, res) {
+    const kitty = new CatModel({ name: req.body.record });
+    kitty.save();
+    return req.query.queryParam;
+  }
 }
 module.exports = DBService;

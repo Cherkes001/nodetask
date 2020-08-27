@@ -14,12 +14,18 @@ class OtherService {
   }
 
   async storeText(req) {
-    await fs.appendFile('./src/text.txt', req.body.value + '\n', function (
-      err
-    ) {
+    fs.appendFile('./src/text.txt', req.body.value + '\n', function (err) {
       if (err) throw err;
     });
     return req.body.value;
+  }
+
+  async pathParam(req) {
+    return req.params.pathParam;
+  }
+
+  async learn(req) {
+    return req.query.queryParam;
   }
 }
 

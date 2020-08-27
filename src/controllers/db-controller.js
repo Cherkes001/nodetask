@@ -12,6 +12,15 @@ class DBController {
       data,
     });
   }
+
+  async writedb(req, res, next) {
+    const data = await this.dbService.writedb(req);
+    res.send({
+      succes: true,
+      data,
+    });
+    next();
+  }
 }
 
 module.exports = DBController;

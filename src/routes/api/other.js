@@ -10,25 +10,12 @@ router.get('/get-config', async (req, res, next) => {
   return await helloController.config(req, res, next);
 });
 
-router.get('/learn', function (req, res) {
-  console.log(req.query.queryParam);
-   res.send({
-      success: true,
-      data: req.query.queryParam,
-    });
+router.get('/learn', (req, res) => {
+  return helloController.learn(req, res);
 });
 
-router.get('/learn/path/:pathParam', function (req, res) {
-  if (req.params.pathParam) {
-    res.send({
-      success: true,
-      data: req.params.pathParam,
-    });
-  } else {
-    res.send({
-      success: false,
-    });
-  }
+router.get('/learn/path/:pathParam', (req, res, next) => {
+  return helloController.pathParam(req, res, next);
 });
 
 router.post('/store-text', async (req, res, next) => {
