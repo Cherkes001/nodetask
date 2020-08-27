@@ -5,7 +5,8 @@ async function getConfig() {
   document.getElementById('root').innerHTML = config;
 }
 async function readb() {
-  let response2 = await fetch('http://localhost:3000/api/readb');
+  let value = document.getElementById('value').value;
+  let response2 = await fetch('http://localhost:3000/api/readb?page=' + value);
   let readb = await response2.text();
   document.getElementById('readb').innerHTML = readb;
 }
