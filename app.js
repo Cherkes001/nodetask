@@ -14,7 +14,7 @@ async function runServer() {
 
 runServer()
   .then(() => {
-    let listener = app.listen(process.env.PORT, process.env.HOST);
+    app.listen(process.env.PORT, process.env.HOST);
     console.log('listen on port ' + process.env.PORT);
   })
   .catch((e) => console.log({ e }));
