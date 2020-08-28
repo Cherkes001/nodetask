@@ -18,3 +18,5 @@ runServer()
     console.log('listen on port ' + process.env.PORT);
   })
   .catch((e) => console.log({ e }));
+
+//sudo docker container start some-mongo
