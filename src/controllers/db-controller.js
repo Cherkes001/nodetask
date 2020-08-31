@@ -16,7 +16,7 @@ class DBController {
   async writedb(req, res, next) {
     const data = await this.dbService.writedb(req);
     res.send({
-      succes: true,
+      success: true,
       data,
     });
     next();
