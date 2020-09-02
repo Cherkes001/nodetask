@@ -2,7 +2,8 @@
 
 ## API
 
-Add community to community collection:  
+### Add community to community collection:
+
 _POST_ `/api/community/create`  
 Query body params:
 
@@ -33,5 +34,65 @@ Response:
 }
 ```
 
-Get full list of community:  
-GET /api/community/list
+### Get full list of community:
+
+_GET_ `/api/community/list`
+
+Response:
+
+```
+{
+    "success": true,
+    "data": [
+        {
+            "_id": "5f49094d078db461918e2fb5",
+            "name": "Demo Record 1",
+            "picture": "/url/pic",
+            "category": "Test",
+            "sub_count": 666,
+            "post_count": 13,
+            "__v": 0
+        },
+        {
+            "_id": "5f49096f89301861e7da677c",
+            "name": "Demo Record 2",
+            "picture": "/url/pic",
+            "category": "Test",
+            "sub_count": 666,
+            "post_count": 13,
+            "__v": 0
+        },
+        {
+            "_id": "5f4909a9bc2a9c626dbb285f",
+            "name": "Demo Record 3",
+            "picture": "/url/pic",
+            "category": "Test",
+            "sub_count": 666,
+            "post_count": 13,
+            "__v": 0
+        }
+}
+```
+
+### Get community from id:
+
+_GET_ `/api/community?id=`
+
+Example: `/api/community?id=5f49094d078db461918e2fb5`
+
+Response:
+
+```
+{
+    "success": true,
+    "data": {
+        "_id": "5f49094d078db461918e2fb5",
+        "name": "Demo Record 1",
+        "picture": "/url/pic",
+        "category": "Test",
+        "sub_count": 666,
+        "post_count": 13,
+        "__v": 0
+    }
+}
+```

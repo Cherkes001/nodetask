@@ -1,5 +1,5 @@
 const CommunityModel = require('../db/models/community');
-const { collection } = require('../db/models/community');
+const UserCommunity = require('../db/models/userCommunity');
 class CommunityService {
   constructor() {}
 
@@ -11,17 +11,24 @@ class CommunityService {
       sub_count: req.body.sub_count,
       post_count: req.body.post_count,
     });
-    com.save();
-    return req.body;
+    await com.save();
   }
 
   async communityList(req) {
-    return await CommunityModel.find({});
+    return CommunityModel.find({});
   }
 
   async community(req) {
     const id = req.query.id;
-    return await CommunityModel.findById(id).exec();
+    return CommunityModel.findById(id).exec();
+  }
+
+  async communityUsers(req) {
+    //console.log(req.body.communityId)
+    const communityId = req.body.communityId;
+    return UserCommunity.find({ communities: communityId })
+      .populate('User')
+      .exec();
   }
 }
 module.exports = CommunityService;

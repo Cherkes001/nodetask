@@ -6,5 +6,6 @@ router.use(bodyParser.json());
 router.use('/dbhandle', require('./dbhandle.js'));
 router.use('/other', require('./other.js'));
 router.use('/collections', require('./communityapi.js'));
+router.use('/users', require('./userapi.js'));
 
 module.exports = router;

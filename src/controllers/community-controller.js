@@ -5,17 +5,24 @@ class CommunityController {
     this.communityService = new CommunityService();
   }
 
-  async createCommunity(req, res, next) {
+  async createCommunity(req, res) {
     const data = await this.communityService.createCommunity(req);
     res.send({
       success: true,
       data,
     });
-    next();
   }
 
   async community(req, res) {
     const data = await this.communityService.community(req);
+    res.send({
+      success: true,
+      data,
+    });
+  }
+
+  async communityUsers(req, res) {
+    const data = await this.communityService.communityUsers(req);
     res.send({
       success: true,
       data,

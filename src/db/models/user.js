@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const User = mongoose.model('User', {
-  sub_list: String,
+  username: String,
 
   userCommunity: {
     type: mongoose.Schema.Types.ObjectId,
