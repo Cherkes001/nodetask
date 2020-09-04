@@ -76,9 +76,9 @@ Response:
 
 ### Get community from id:
 
-_GET_ `/api/community?id=`
+_GET_ `/api/community`
 
-Example: `/api/community?id=5f49094d078db461918e2fb5`
+Example: in headers `communityId = 5f49094d078db461918e2fb5`
 
 Response:
 
@@ -94,5 +94,52 @@ Response:
         "post_count": 13,
         "__v": 0
     }
+}
+```
+
+### Subscribe:  
+
+_POST_ `/api/users/userapi/subscribe`
+
+Example:  
+In headers `userid = 5f51dff3305e992100ff1177`
+In body 
+```
+{
+    "communityId": "5f4909a9bc2a9c626dbb285f"
+}
+```
+Response:  
+```
+{
+    "success": true
+}
+```
+
+### Get followers of community:  
+
+_GET_ `api/collections/community-users`  
+
+Example: 
+In body 
+```
+{
+    "communityId": "5f4909a9bc2a9c626dbb285f"
+}
+```
+Response:  
+```
+{
+    "success": true,
+    "data": [
+        {
+            "_id": "5f4e3cf72df96ec1eff5fbbb",
+            "__v": 0
+        },
+        {
+            "_id": "5f4fa735a3977a8f32f578c7",
+            "__v": 0
+        }
+    ]
 }
 ```

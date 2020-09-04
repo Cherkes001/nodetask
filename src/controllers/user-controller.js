@@ -6,15 +6,9 @@ class UserController {
   }
 
   async subscribe(req, res) {
-    const data = await this.userService.subscribe(req);
-    res.send({
-      success: true,
-      data,
-    });
-  }
-
-  async genUser(req, res) {
-    const data = await this.userService.genUser(req);
+    const communityId = req.body.communityId;
+    const userId = req.headers.userId;
+    const data = await this.userService.subscribe(communityId, userId);
     res.send({
       success: true,
       data,

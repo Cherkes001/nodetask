@@ -1,26 +1,25 @@
-const UserModel = require('./../db/models/user');
 const UserCommunity = require('../db/models/userCommunity');
+
 class UserService {
   constructor() {}
 
-  async subscribe(req) {
-    //console.log(req.header('userId'));
-    const sub = new UserCommunity({
-      users: req.header('userId'),
-      communities: req.body.communityId,
+  async subscribe(communityId, userId) {
+    const check = await UserCommunity.exists(
+      { user: userId },
+      { community: communityId }
+    );
+    const subscribe = new UserCommunity({
+      user: userId,
+      community: communityId,
     });
-    await sub.save();
-    //return req.body; - /!\
+
+    if (check == true) {
+      //return 'Record Exists';
+    } else {
+      await subscribe.save();
+      //return 'Recorded';
+    }
   }
-
-  async genUser(req) {
-    const usr = new UserModel({
-      
-    });
-    await usr.save();
-  }
-
-
 }
 
 module.exports = UserService;
