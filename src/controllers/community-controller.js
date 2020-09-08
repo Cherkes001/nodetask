@@ -24,7 +24,7 @@ class CommunityController {
   }
 
   async communityUsers(req, res) {
-    const communityId = req.headers.communityId;
+    const communityId = req.headers.communityid;
     const data = await this.communityService.communityUsers(communityId);
     res.send({
       success: true,

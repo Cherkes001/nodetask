@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const DBController = require('./../../controllers/db-controller.js');
+const DBController = require('./../../controllers/db-controller');
 const dbController = new DBController();
 
 router.post('/writedb', async (req, res, next) => {

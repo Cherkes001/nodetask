@@ -4,6 +4,8 @@ class UserService {
   constructor() {}
 
   async subscribe(communityId, userId) {
+    console.log(communityId);
+    console.log(userId)
     const check = await UserCommunity.exists(
       { user: userId },
       { community: communityId }
@@ -14,10 +16,10 @@ class UserService {
     });
 
     if (check == true) {
-      return 'Record Exists';
+      //return 'Record Exists';
     } else {
       await subscribe.save();
-      return 'Recorded';
+      //return 'Recorded';
     }
   }
 }
