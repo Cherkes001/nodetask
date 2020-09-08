@@ -16,5 +16,6 @@ runServer()
   .then(() => {
     app.listen(process.env.PORT, process.env.HOST);
     console.log('listen on port ' + process.env.PORT);
+    console.log('ip addr ' + process.env.HOST);
   })
   .catch((e) => console.log({ e }));
