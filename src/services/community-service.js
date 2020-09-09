@@ -40,11 +40,14 @@ class CommunityService {
       });
     };
 
-    //const followers =
-
     const communities = await CommunityModel.find({}).exec();
     const result = await Promise.all(
       communities.map(async (community) => {
+        const followers = await UserCommunity.countDocuments({ //count subs of community
+          community: community._id,
+        }).exec();
+        console.log(followers);
+
         return {
           id: community._id,
           image: community.image,
