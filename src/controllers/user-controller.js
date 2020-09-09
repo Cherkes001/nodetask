@@ -7,7 +7,7 @@ class UserController {
 
   async subscribe(req, res) {
     const communityId = req.body.communityId;
-    const userId = req.headers.userid;
+    const userId = req.headers.userid || res.getHeader('userid');
     const data = await this.userService.subscribe(communityId, userId);
     res.send({
       success: true,

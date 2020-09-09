@@ -4,22 +4,25 @@ class UserService {
   constructor() {}
 
   async subscribe(communityId, userId) {
-    console.log(communityId);
-    console.log(userId)
-    const check = await UserCommunity.exists(
-      { user: userId },
-      { community: communityId }
-    );
+    const check = await UserCommunity.exists({
+      user: userId,
+      community: communityId,
+    });
     const subscribe = new UserCommunity({
       user: userId,
       community: communityId,
     });
-
-    if (check == true) {
-      //return 'Record Exists';
+    console.log(communityId);
+    if (communityId === undefined) {
+      return 'Error, communityId not defined';
     } else {
-      await subscribe.save();
-      //return 'Recorded';
+      if (check) {
+        await UserCommunity.deleteOne({ user: userId, community: communityId });
+        return 'Record deleted';
+      } else {
+        await subscribe.save();
+        return 'Recorded';
+      }
     }
   }
 }

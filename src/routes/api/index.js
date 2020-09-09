@@ -8,17 +8,17 @@ router.use(bodyParser.json());
 router.use('/', async (req, res, next) => {
   const userid = req.headers.userid;
   const isObjectId = mongoose.Types.ObjectId.isValid(userid);
-  
+  //console.log(isObjectId);
   if (isObjectId) {
     const checkUserExists = await UserModel.exists({ _id: userid });
     if (checkUserExists) {
-      res.set({ userid });
+      res.header('userid', userid);
     } else {
       return res.send({ success: false, error: 'ObjectId invalid' });
     }
   } else {
     let user = await UserModel.create({});
-    res.set({ userid: user._id });
+    res.header('userid', user._id);
   }
   next();
 });
