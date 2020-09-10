@@ -17,7 +17,10 @@ class UserService {
       return 'Error, communityId not defined';
     } else {
       if (check) {
-        await UserCommunity.deleteOne({ user: userId, community: communityId });
+        return UserCommunity.deleteOne({
+          user: userId,
+          community: communityId,
+        });
       } else {
         return subscribe.save();
       }

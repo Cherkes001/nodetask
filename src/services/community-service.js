@@ -37,7 +37,6 @@ class CommunityService {
     const communities = await CommunityModel.find({}).exec();
     const result = await Promise.all(
       communities.map(async (community) => {
-        
         const followersAmount = await UserCommunity.countDocuments({
           community: community._id,
         }).exec();
@@ -68,6 +67,7 @@ class CommunityService {
     const data = await UserCommunity.find({ community: communityId })
       .populate('user')
       .exec();
+
     const result = data.map((value) => {
       return value.user;
     });

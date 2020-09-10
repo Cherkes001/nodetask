@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 router.use(bodyParser.json());
 
 router.use('/', async (req, res, next) => {
-  
   const userid = req.headers.userid;
   const isObjectId = mongoose.Types.ObjectId.isValid(userid);
 
