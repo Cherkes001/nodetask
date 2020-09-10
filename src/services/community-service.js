@@ -1,5 +1,6 @@
 const CommunityModel = require('../db/models/community');
 const UserCommunity = require('../db/models/userCommunity');
+
 class CommunityService {
   constructor() {}
 
@@ -33,28 +34,26 @@ class CommunityService {
     // });
     // return result;
 
-    const isFollow = async (userId, communityId) => {
-      return await UserCommunity.exists({
-        user: userId,
-        community: communityId,
-      });
-    };
-
     const communities = await CommunityModel.find({}).exec();
     const result = await Promise.all(
       communities.map(async (community) => {
-        const followers = await UserCommunity.countDocuments({ //count subs of community
+        
+        const followersAmount = await UserCommunity.countDocuments({
           community: community._id,
         }).exec();
-        console.log(followers);
+        const isFollow = await UserCommunity.exists({
+          user: userId,
+          community: community._id,
+        });
 
         return {
           id: community._id,
+          name: community.name,
           image: community.image,
           type: community.type,
-          followersAmount: followers,
+          followersAmount,
           postsAmount: getRandomInt(10000),
-          isFollow: await isFollow(userId, community._id),
+          isFollow,
         };
       })
     );

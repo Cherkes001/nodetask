@@ -8,6 +8,7 @@ class CommunityController {
   async createCommunity(req, res) {
     const item = req.body;
     const data = await this.communityService.createCommunity(item);
+
     res.send({
       success: true,
       data,
@@ -17,6 +18,7 @@ class CommunityController {
   async community(req, res) {
     const communityId = req.headers.communityid;
     const data = await this.communityService.community(communityId);
+
     res.send({
       success: true,
       data,
@@ -26,6 +28,7 @@ class CommunityController {
   async communityUsers(req, res) {
     const communityId = req.headers.communityid;
     const data = await this.communityService.communityUsers(communityId);
+
     res.send({
       success: true,
       data,
@@ -35,6 +38,7 @@ class CommunityController {
   async communityList(req, res) {
     const userId = req.headers.userid;
     const data = await this.communityService.communityList(userId);
+
     res.send({
       success: true,
       data,

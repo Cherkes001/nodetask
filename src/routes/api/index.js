@@ -6,9 +6,10 @@ const mongoose = require('mongoose');
 router.use(bodyParser.json());
 
 router.use('/', async (req, res, next) => {
+  
   const userid = req.headers.userid;
   const isObjectId = mongoose.Types.ObjectId.isValid(userid);
-  //console.log(isObjectId);
+
   if (isObjectId) {
     const checkUserExists = await UserModel.exists({ _id: userid });
     if (checkUserExists) {

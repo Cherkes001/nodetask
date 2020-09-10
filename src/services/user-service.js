@@ -12,16 +12,14 @@ class UserService {
       user: userId,
       community: communityId,
     });
-    console.log(communityId);
+
     if (communityId === undefined) {
       return 'Error, communityId not defined';
     } else {
       if (check) {
         await UserCommunity.deleteOne({ user: userId, community: communityId });
-        return 'Record deleted';
       } else {
-        await subscribe.save();
-        return 'Recorded';
+        return subscribe.save();
       }
     }
   }
