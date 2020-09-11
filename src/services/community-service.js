@@ -32,24 +32,28 @@ class CommunityService {
     function getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
     }
+
     const followCommunities = await UserCommunity.find({ user: userId })
       .populate('community')
       .exec();
 
     const result = await Promise.all(
-      followCommunities.map(async (community) => {
+      followCommunities.map(async (userCommunity) => {
         const followersAmount = await UserCommunity.countDocuments({
-          community: community._id,
+          community: userCommunity.community._id,
         }).exec();
-
+        // const isFollow = await UserCommunity.exists({
+        //   user: userId,
+        //   community: userCommunity.community._id,
+        // });
         return {
-          id: community._id,
-          name: community.name,
-          image: community.image,
-          type: community.type,
+          id: userCommunity.community.get('_id'),
+          name: userCommunity.community.get('name'),
+          image: userCommunity.community.get('image'),
+          type: userCommunity.community.get('type'),
           followersAmount,
           postsAmount: getRandomInt(10000),
-          //isFollow: true,
+          //isFollow,
         };
       })
     );
