@@ -2,11 +2,11 @@ const router = require('express').Router();
 const communityController = require('./../../controllers/community-controller');
 const communitycontroller = new communityController();
 
-router.post('/community/create', async (req, res) => {
+router.post('/create', async (req, res) => {
   return communitycontroller.createCommunity(req, res);
 });
 
-router.get('/community/list', async (req, res) => {
+router.get('/list', async (req, res) => {
   return communitycontroller.communityList(req, res);
 });
 
