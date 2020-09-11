@@ -67,7 +67,6 @@ class CommunityService {
     const data = await UserCommunity.find({ community: communityId })
       .populate('user')
       .exec();
-
     const result = data.map((value) => {
       return value.user;
     });
