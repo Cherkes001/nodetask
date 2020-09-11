@@ -39,5 +39,16 @@ class CommunityController {
       data,
     });
   }
+
+
+  async userCommunity(req, res) {
+    const userId = req.headers.userid;
+    const data = await this.communityService.userCommunity(userId);
+
+    res.send({
+      success: true,
+      data,
+    });
+  }
 }
 module.exports = CommunityController;

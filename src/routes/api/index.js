@@ -21,7 +21,6 @@ router.use('/', async (req, res, next) => {
     return res.send({ success: false, error: 'ObjectId invalid' });
   }
 });
-
 router.use('/dbhandle', require('./dbhandle.js'));
 router.use('/other', require('./other.js'));
 router.use('/collections', require('./communityapi.js'));

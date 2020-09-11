@@ -27,5 +27,33 @@ class CommunityService {
     });
     return result;
   }
+
+  async userCommunity(userId) {
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    const followCommunities = await UserCommunity.find({ user: userId })
+      .populate('community')
+      .exec();
+
+    const result = await Promise.all(
+      followCommunities.map(async (community) => {
+        const followersAmount = await UserCommunity.countDocuments({
+          community: community._id,
+        }).exec();
+
+        return {
+          id: community._id,
+          name: community.name,
+          image: community.image,
+          type: community.type,
+          followersAmount,
+          postsAmount: getRandomInt(10000),
+          //isFollow: true,
+        };
+      })
+    );
+    return result;
+  }
 }
 module.exports = CommunityService;
