@@ -2,15 +2,23 @@
 
 ## API
 
+## User - Generation:
+
+При каждом обращениии к API генерируется новый userId - при двух условиях:  
+A: Был отправлен headers без userId или с пустым userId;  
+B: Отправлен не валидный userId в headers;
+
+Сгенерированый userId возвращается в headers, если был отправлен валидный userId, то возвращается тот же что и был отпрвавлен.
+
 ### Add community to community collection:
 
 _POST_ `/api/community/create`  
-Query body params:
+Example: in body
 
 ```
 {
     "name" : "Example",
-    "picture" : "http://exmpale.com/example.png",
+    "picture" : "http://example.com/example.png",
     "category" : "Fun",
     "sub_count" : "123",
     "post_count" : "321"
@@ -25,7 +33,7 @@ Response:
     "data": {
         "_id": "5f4cd0a39bdace5298c550db",
         "name": "Example",
-        "picture": "http://exmpale.com/example.png",
+        "picture": "http://example.com/example.png",
         "category": "Fun",
         "sub_count": 123,
         "post_count": 321,
@@ -97,37 +105,37 @@ Response:
 }
 ```
 
-### Subscribe:  
+### Follow :
 
-_POST_ `/api/users/userapi/subscribe`
+_POST_ `/api/userapi/subscribe`
 
 Example:  
 In headers `userid = 5f51dff3305e992100ff1177`
-In body 
+In body
+
 ```
 {
     "communityId": "5f4909a9bc2a9c626dbb285f"
 }
 ```
-Response:  
+
+Response:
+
 ```
 {
     "success": true
 }
 ```
 
-### Get followers of community:  
+### Get followers of community:
 
-_GET_ `api/collections/community-users`  
+_GET_ `/api/community-users`
 
-Example: 
-In body 
-```
-{
-    "communityId": "5f4909a9bc2a9c626dbb285f"
-}
-```
-Response:  
+Example:
+In headers `communityId: "5f4909a9bc2a9c626dbb285f`
+
+Response:
+
 ```
 {
     "success": true,

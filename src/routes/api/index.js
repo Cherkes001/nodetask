@@ -24,7 +24,7 @@ router.use('/', async (req, res, next) => {
 
 router.use('/dbhandle', require('./dbhandle.js'));
 router.use('/other', require('./other.js'));
-router.use('/collections', require('./communityapi.js'));
-router.use('/users', require('./userapi.js'));
+router.use('/community', require('./communityapi.js'));
+router.use('/userapi', require('./userapi.js'));
 
 module.exports = router;

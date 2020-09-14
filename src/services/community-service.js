@@ -1,5 +1,6 @@
 const CommunityModel = require('../db/models/community');
 const UserCommunity = require('../db/models/userCommunity');
+
 class CommunityService {
   constructor() {}
 
