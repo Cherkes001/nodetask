@@ -1,4 +1,5 @@
 const CatModel = require('./../db/models/cat');
+
 class DBService {
   constructor() {}
 

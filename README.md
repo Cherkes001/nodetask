@@ -2,10 +2,13 @@
 
 ## API
 
+## User - Generation  
+
+
 ### Add community to community collection:
 
-_POST_ `/api/community/create`  
-Query body params:
+_POST_ `/api/collections/community/create`  
+Example: in body
 
 ```
 {
@@ -36,7 +39,7 @@ Response:
 
 ### Get full list of community:
 
-_GET_ `/api/community/list`
+_GET_ `/api/collections/community/list`
 
 Response:
 
@@ -76,7 +79,7 @@ Response:
 
 ### Get community from id:
 
-_GET_ `/api/community`
+_GET_ `/api/collections/community`
 
 Example: in headers `communityId = 5f49094d078db461918e2fb5`
 
@@ -97,37 +100,37 @@ Response:
 }
 ```
 
-### Subscribe:  
+### Follow :
 
 _POST_ `/api/users/userapi/subscribe`
 
 Example:  
 In headers `userid = 5f51dff3305e992100ff1177`
-In body 
+In body
+
 ```
 {
     "communityId": "5f4909a9bc2a9c626dbb285f"
 }
 ```
-Response:  
+
+Response:
+
 ```
 {
     "success": true
 }
 ```
 
-### Get followers of community:  
+### Get followers of community:
 
-_GET_ `api/collections/community-users`  
+_GET_ `api/collections/community-users`
 
-Example: 
-In body 
-```
-{
-    "communityId": "5f4909a9bc2a9c626dbb285f"
-}
-```
-Response:  
+Example:
+In headers `communityId: "5f4909a9bc2a9c626dbb285f`
+
+Response:
+
 ```
 {
     "success": true,
