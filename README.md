@@ -84,7 +84,7 @@ Response:
 
 ### Get community from id:
 
-_GET_ `/api/community`
+_GET_ `/api/collections/community`
 
 Example: in params `:communityId = 5f58e6d0b0b463955d064538`
 
