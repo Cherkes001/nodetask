@@ -42,10 +42,6 @@ class CommunityService {
         const followersAmount = await UserCommunity.countDocuments({
           community: userCommunity.community._id,
         }).exec();
-        // const isFollow = await UserCommunity.exists({
-        //   user: userId,
-        //   community: userCommunity.community._id,
-        // });
         return {
           id: userCommunity.community.get('_id'),
           name: userCommunity.community.get('name'),
@@ -53,7 +49,6 @@ class CommunityService {
           type: userCommunity.community.get('type'),
           followersAmount,
           postsAmount: getRandomInt(10000),
-          //isFollow,
         };
       })
     );
