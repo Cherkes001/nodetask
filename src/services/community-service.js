@@ -72,5 +72,32 @@ class CommunityService {
     });
     return result;
   }
+
+  async userCommunity(userId) {
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const followCommunities = await UserCommunity.find({ user: userId })
+      .populate('community')
+      .exec();
+
+    const result = await Promise.all(
+      followCommunities.map(async (userCommunity) => {
+        const followersAmount = await UserCommunity.countDocuments({
+          community: userCommunity.community._id,
+        }).exec();
+        return {
+          id: userCommunity.community.get('_id'),
+          name: userCommunity.community.get('name'),
+          image: userCommunity.community.get('image'),
+          type: userCommunity.community.get('type'),
+          followersAmount,
+          postsAmount: getRandomInt(10000),
+        };
+      })
+    );
+    return result;
+  }
 }
 module.exports = CommunityService;

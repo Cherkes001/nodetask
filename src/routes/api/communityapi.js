@@ -18,4 +18,8 @@ router.get('/community-users', async (req, res) => {
   return communitycontroller.communityUsers(req, res);
 });
 
+router.get('/user-community', async (req, res) => {
+  return communitycontroller.userCommunity(req, res);
+});
+
 module.exports = router;
