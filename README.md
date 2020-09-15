@@ -12,7 +12,7 @@ B: Отправлен не валидный userId в headers;
 
 ### Add community to community collection:
 
-_POST_ `/api/community/create`  
+_POST_ `/api/community/`  
 Example: in body
 
 ```
@@ -44,7 +44,7 @@ Response:
 
 ### Get full list of community:
 
-_GET_ `/api/community/list`
+_GET_ `/api/community/`
 
 Response:
 
@@ -86,7 +86,7 @@ Response:
 
 _GET_ `/api/community`
 
-Example: in headers `communityId = 5f49094d078db461918e2fb5`
+Example: in params `:communityId = 5f58e6d0b0b463955d064538`
 
 Response:
 
@@ -94,12 +94,10 @@ Response:
 {
     "success": true,
     "data": {
-        "_id": "5f49094d078db461918e2fb5",
-        "name": "Demo Record 1",
-        "picture": "/url/pic",
-        "category": "Test",
-        "sub_count": 666,
-        "post_count": 13,
+        "_id": "5f58e6d0b0b463955d064538",
+        "name": "Test Community 1",
+        "image": "http://placekitten.com/256/256?image=1",
+        "type": "News",
         "__v": 0
     }
 }
