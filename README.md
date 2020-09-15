@@ -13,6 +13,7 @@ B: Отправлен не валидный userId в headers;
 ### Add community to community collection:
 
 _POST_ `/api/community/create`  
+
 Example: in body
 
 ```
@@ -44,7 +45,7 @@ Response:
 
 ### Get full list of community:
 
-_GET_ `/api/community/list`
+_GET_ `/api/collections/community/list`
 
 Response:
 
@@ -84,7 +85,7 @@ Response:
 
 ### Get community from id:
 
-_GET_ `/api/community`
+_GET_ `/api/collections/community`
 
 Example: in headers `communityId = 5f49094d078db461918e2fb5`
 
@@ -130,6 +131,7 @@ Response:
 ### Get followers of community:
 
 _GET_ `/api/community-users`
+
 
 Example:
 In headers `communityId: "5f4909a9bc2a9c626dbb285f`

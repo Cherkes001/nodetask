@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 
 const Community = mongoose.model('Community', {
   name: String,
-  picture: String,
-  category: String,
-  sub_count: Number,
-  post_count: Number,
+  image: String,
+  type: String,
 
   communityUser: {
     type: mongoose.Schema.Types.ObjectId,
